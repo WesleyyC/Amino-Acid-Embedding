@@ -1,6 +1,7 @@
 # Filter Data
 *.zip
 *.faa
+*.bin
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

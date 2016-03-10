@@ -27,7 +27,7 @@ BLOSUM=exp(O_BLOSUM/BLOSUM_Sigma);
 
 s=sum(BLOSUM,2);
 n=repmat(s,1,20);
-BLOSUM=BLOSUM./n;
+N_BLOSUM=BLOSUM./n;
 
 
 load('a2v.mat')
@@ -36,18 +36,55 @@ s=sum(similarity,2);
 n=repmat(s,1,20);
 norm_similarity=similarity./n;
 
+%%
+diff_similarity=similarity.*similarity;
+diff_similarity=diff_similarity.*diff_similarity;
+diff_similarity=diff_similarity.*diff_similarity;
+diff_similarity=diff_similarity.*diff_similarity;
+diff_similarity=diff_similarity.*sqrt(diff_similarity);
+s=sum(diff_similarity,2);
+n=repmat(s,1,20);
+norm_diff_similarity=diff_similarity./n;
+
+%%
+'R'
+aa_dist_similarity('R','H',N_BLOSUM)
+aa_dist_similarity('R','K',N_BLOSUM)
+aa_dist_similarity('R','A',N_BLOSUM)
+aa_dist_similarity('R','H',norm_diff_similarity)
+aa_dist_similarity('R','K',norm_diff_similarity)
+aa_dist_similarity('R','A',norm_diff_similarity)
+
+%%
+'A'
+aa_dist_similarity('A','F',N_BLOSUM)
+aa_dist_similarity('A','W',N_BLOSUM)
+aa_dist_similarity('A','S',N_BLOSUM)
+aa_dist_similarity('A','F',norm_diff_similarity)
+aa_dist_similarity('A','W',norm_diff_similarity)
+aa_dist_similarity('A','S',norm_diff_similarity)
+
+%%
+'S'
+aa_dist_similarity('S','N',N_BLOSUM)
+aa_dist_similarity('S','Q',N_BLOSUM)
+aa_dist_similarity('S','Y',N_BLOSUM)
+aa_dist_similarity('S','N',norm_diff_similarity)
+aa_dist_similarity('S','Q',norm_diff_similarity)
+aa_dist_similarity('S','Y',norm_diff_similarity)
 
 %% 
 [eigenvectors,scores,variances]  = pca(vector);
 
-% num_features=1:length(variances);
-% percentage=zeros(size(num_features));
-% 
-% for i = 2:length(variances)
-%     percentage(i) = sum(variances(1:i-1))/sum(variances);
-% end
-% 
-% plot(num_features,percentage);
+num_features=1:length(variances);
+percentage=zeros(size(num_features));
+
+for i = 2:length(variances)
+    percentage(i) = sum(variances(1:i-1))/sum(variances);
+end
+
+figure()
+plot(num_features,percentage);
 
 %%
 AAs={'C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y','W'};
@@ -56,17 +93,8 @@ X=double(scores(:,1:3))*10;
 x=X(:,1);
 y=X(:,1);
 z=X(:,1);
+figure()
 scatter3(x,y,z);
 dx = 0.1; dy = 0.1; dz = 0.1;
 text(x+dx, y+dy,z+dz, AAs);
-
-%%
-AAs={'C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y','W'};
-
-X=double(scores(:,1:2))*100;
-x=X(:,1);
-y=X(:,1);
-scatter(x,y);
-dx = 0.1; dy = 0.1; dz = 0.1;
-text(x+dx, y+dy, AAs);
 

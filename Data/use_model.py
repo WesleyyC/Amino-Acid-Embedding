@@ -4,7 +4,7 @@ import scipy.io as sio
 import gensim, logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-wfname = 'test.bin'
+wfname = 'sg_window8.bin'
 model = gensim.models.Word2Vec.load(wfname)
 
 AAs=['C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y','W'];

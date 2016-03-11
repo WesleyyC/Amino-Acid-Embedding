@@ -40,7 +40,6 @@ norm_similarity=similarity./n;
 diff_similarity=similarity.*similarity;
 diff_similarity=diff_similarity.*diff_similarity;
 diff_similarity=diff_similarity.*diff_similarity;
-diff_similarity=diff_similarity.*diff_similarity;
 diff_similarity=diff_similarity.*sqrt(diff_similarity);
 s=sum(diff_similarity,2);
 n=repmat(s,1,20);
@@ -54,6 +53,9 @@ aa_dist_similarity('R','A',N_BLOSUM)
 aa_dist_similarity('R','H',norm_diff_similarity)
 aa_dist_similarity('R','K',norm_diff_similarity)
 aa_dist_similarity('R','A',norm_diff_similarity)
+% aa_dist_similarity('R','H',norm_similarity)
+% aa_dist_similarity('R','K',norm_similarity)
+% aa_dist_similarity('R','A',norm_similarity)
 
 %%
 'A'

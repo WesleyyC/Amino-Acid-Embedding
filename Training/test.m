@@ -32,6 +32,8 @@ N_BLOSUM=BLOSUM./n;
 
 load('a2v.mat')
 
+% similarity = similarity-repmat(min(similarity')',1,20);
+
 s=sum(similarity,2);
 n=repmat(s,1,20);
 norm_similarity=similarity./n;
@@ -40,7 +42,7 @@ norm_similarity=similarity./n;
 diff_similarity=similarity.*similarity;
 diff_similarity=diff_similarity.*diff_similarity;
 diff_similarity=diff_similarity.*diff_similarity;
-diff_similarity=diff_similarity.*sqrt(diff_similarity);
+diff_similarity=diff_similarity.*diff_similarity;
 s=sum(diff_similarity,2);
 n=repmat(s,1,20);
 norm_diff_similarity=diff_similarity./n;
@@ -53,9 +55,7 @@ aa_dist_similarity('R','A',N_BLOSUM)
 aa_dist_similarity('R','H',norm_diff_similarity)
 aa_dist_similarity('R','K',norm_diff_similarity)
 aa_dist_similarity('R','A',norm_diff_similarity)
-% aa_dist_similarity('R','H',norm_similarity)
-% aa_dist_similarity('R','K',norm_similarity)
-% aa_dist_similarity('R','A',norm_similarity)
+
 
 %%
 'A'
@@ -74,6 +74,7 @@ aa_dist_similarity('S','Y',N_BLOSUM)
 aa_dist_similarity('S','N',norm_diff_similarity)
 aa_dist_similarity('S','Q',norm_diff_similarity)
 aa_dist_similarity('S','Y',norm_diff_similarity)
+
 
 %% 
 [eigenvectors,scores,variances]  = pca(vector);
@@ -99,4 +100,12 @@ figure()
 scatter3(x,y,z);
 dx = 0.1; dy = 0.1; dz = 0.1;
 text(x+dx, y+dy,z+dz, AAs);
+
+%%
+af=vector(aa_idx('A'),:)-vector(aa_idx('F'),:);
+aw=vector(aa_idx('A'),:)-vector(aa_idx('W'),:);
+as=vector(aa_idx('A'),:)-vector(aa_idx('S'),:);
+pdist([af;aw],'cosine')
+af*as'
+
 

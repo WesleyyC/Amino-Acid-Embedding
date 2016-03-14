@@ -1,0 +1,12 @@
+
+load('a2v.mat')
+
+AAs={'C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y','W'};
+
+train_X = vector;
+mappedX = tsne(train_X);
+%%
+figure()
+scatter3(mappedX(:,1), mappedX(:,2), mappedX(:,3));
+dx = 0.1; dy = 0.1; dz=0.1;
+text(mappedX(:,1)+dx, mappedX(:,2)+dy,mappedX(:,3)+dz, AAs);

@@ -30,7 +30,7 @@ n=repmat(s,1,20);
 N_BLOSUM=BLOSUM./n;
 
 
-load('a2v.mat')
+load('a2v_16.mat')
 
 % similarity = similarity-repmat(min(similarity')',1,20);
 
@@ -42,19 +42,21 @@ norm_similarity=similarity./n;
 diff_similarity=similarity.*similarity;
 diff_similarity=diff_similarity.*diff_similarity;
 diff_similarity=diff_similarity.*diff_similarity;
-diff_similarity=diff_similarity.*diff_similarity;
+% diff_similarity=diff_similarity.*diff_similarity;
+% diff_similarity=diff_similarity.*diff_similarity;
+% diff_similarity=diff_similarity.*sqrt(diff_similarity);
 s=sum(diff_similarity,2);
 n=repmat(s,1,20);
 norm_diff_similarity=diff_similarity./n;
-
+imshow(norm_diff_similarity*2,'InitialMagnification',1000)
 %%
 'R'
 aa_dist_similarity('R','H',N_BLOSUM)
 aa_dist_similarity('R','K',N_BLOSUM)
 aa_dist_similarity('R','A',N_BLOSUM)
-aa_dist_similarity('R','H',norm_diff_similarity)
-aa_dist_similarity('R','K',norm_diff_similarity)
-aa_dist_similarity('R','A',norm_diff_similarity)
+aa_dist_similarity('R','H',norm_similarity)
+aa_dist_similarity('R','K',norm_similarity)
+aa_dist_similarity('R','A',norm_similarity)
 
 
 %%
@@ -62,18 +64,18 @@ aa_dist_similarity('R','A',norm_diff_similarity)
 aa_dist_similarity('A','F',N_BLOSUM)
 aa_dist_similarity('A','W',N_BLOSUM)
 aa_dist_similarity('A','S',N_BLOSUM)
-aa_dist_similarity('A','F',norm_diff_similarity)
-aa_dist_similarity('A','W',norm_diff_similarity)
-aa_dist_similarity('A','S',norm_diff_similarity)
+aa_dist_similarity('A','F',norm_similarity)
+aa_dist_similarity('A','W',norm_similarity)
+aa_dist_similarity('A','S',norm_similarity)
 
 %%
 'S'
 aa_dist_similarity('S','N',N_BLOSUM)
 aa_dist_similarity('S','Q',N_BLOSUM)
 aa_dist_similarity('S','Y',N_BLOSUM)
-aa_dist_similarity('S','N',norm_diff_similarity)
-aa_dist_similarity('S','Q',norm_diff_similarity)
-aa_dist_similarity('S','Y',norm_diff_similarity)
+aa_dist_similarity('S','N',norm_similarity)
+aa_dist_similarity('S','Q',norm_similarity)
+aa_dist_similarity('S','Y',norm_similarity)
 
 
 %% 
@@ -104,8 +106,32 @@ text(x+dx, y+dy,z+dz, AAs);
 %%
 af=vector(aa_idx('A'),:)-vector(aa_idx('F'),:);
 aw=vector(aa_idx('A'),:)-vector(aa_idx('W'),:);
-as=vector(aa_idx('A'),:)-vector(aa_idx('S'),:);
 pdist([af;aw],'cosine')
+
+%%
+as=vector(aa_idx('A'),:)-vector(aa_idx('S'),:);
 af*as'
 
+%%
+nq=vector(aa_idx('N'),:)-vector(aa_idx('Q'),:);
+de=vector(aa_idx('D'),:)-vector(aa_idx('E'),:);
+pdist([nq;de],'cosine')
+%%
+t_count = 0;
+a_count = 0;
 
+for a = 1:20
+    for b = 1:20
+        for c = 1:20
+            for d = 1:20
+                bd=((N_BLOSUM(a,b)-N_BLOSUM(c,d))>0);
+                sd=((norm_similarity(a,b)-norm_similarity(c,d))>0);
+                if bd==sd
+                    a_count = a_count + 1;
+                end
+                t_count = t_count + 1;
+            end
+        end
+    end
+end
+agree_rate = a_count/t_count

@@ -11,7 +11,7 @@ import gensim, logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
 ###### SETUP IO #####
-wfname = 'sg_window10_size22.bin'
+wfname = 'sg_window10_size16.bin'
 rfname = 'processed.all.protein.faa'
 
 
@@ -75,7 +75,7 @@ sentences = Sentences_Iter(rfname)
 # sg: default (sg=0), CBOW is used. Otherwise (sg=1), skip-gram is employed. We use sg becuase it has a more refine
 # woker: parallel CPU
 # data length: mean 645 min 21
-model = gensim.models.Word2Vec(sentences, size=22, window=25, workers=8, sg=1)
+model = gensim.models.Word2Vec(sentences, size=16, window=10, workers=8, sg=1)
 
 model.save(wfname)
 

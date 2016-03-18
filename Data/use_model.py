@@ -4,19 +4,34 @@ import scipy.io as sio
 import gensim, logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-wfname = 'sg_window10_size16.bin'
+wfname = 'context_sg_window10_size200.bin'
 model = gensim.models.Word2Vec.load(wfname)
 
+context_dict = model.vocab.keys();
+
+candidate=set()
 AAs=['C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y','W'];
+for AA in AAs:
+	candidate.add(AA)
 
-f_result = []
+def check_candidate(context):
+	for AA in context:
+		if AA not in candidate:
+			return False
+	return True
+
+context_list = []
+for context in context_dict:
+	if check_candidate(context):
+		context_list.append(context)
+
+s_result = []
 v_result = []
-
-for AA1 in AAs:
+for context_1 in context_list:
 	r_result = []
-	for AA2 in AAs:
-		r_result.append(model.similarity(AA1,AA2))
-	f_result.append(r_result)
-	v_result.append(model[AA1])
+	for context_2 in context_list:
+		r_result.append(model.similarity(context_1,context_2))
+	s_result.append(r_result)
+	v_result.append(model[context_1])
 
-sio.savemat('a2v.mat', {'similarity': f_result,'vector': v_result})
+sio.savemat('a2v.mat', {'similarity': s_result,'vector': v_result,'dict':context_list})

@@ -30,7 +30,7 @@ n=repmat(s,1,20);
 N_BLOSUM=BLOSUM./n;
 
 
-load('a2v_16.mat')
+load('a2v_context.mat')
 
 % similarity = similarity-repmat(min(similarity')',1,20);
 

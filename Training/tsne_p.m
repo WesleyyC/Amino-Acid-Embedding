@@ -39,7 +39,7 @@ function ydata = tsne_p(P, labels, no_dims)
     final_momentum = 0.8;                               % value to which momentum is changed
     mom_switch_iter = 250;                              % iteration at which momentum is changed
     stop_lying_iter = 100;                              % iteration at which lying about P-values is stopped
-    max_iter = 1000;                                    % maximum number of iterations
+    max_iter = 2000;                                    % maximum number of iterations
     epsilon = 500;                                      % initial learning rate
     min_gain = .01;                                     % minimum gain for delta-bar-delta
     

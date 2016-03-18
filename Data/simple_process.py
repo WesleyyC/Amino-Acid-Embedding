@@ -1,11 +1,23 @@
 r=open('all.protein.faa','r')
-w=open('processed.all.protein.faa','w')
+w=open('context.processed.all.protein.faa','w')
 
 start = True
 mem = ""
 for line in r:
 	if '>' in line and not start:
-		w.write (" ".join(mem.replace("\n", ""))+"\n")
+		list_char = list(mem.replace('\n',''))
+		list_context = []
+		list_context_length = 1
+		for i in range(len(list_char)):
+			tmp=""
+			for j in range(i-list_context_length,i+list_context_length+1):
+				if j < 0 or j>=len(list_char):
+					tmp=tmp+'-'
+				else:
+					tmp=tmp+list_char[j]
+			list_context.append(tmp)
+
+		w.write (" ".join(list_context)+"\n")
 		mem = ""
 	else:
 		if not start:

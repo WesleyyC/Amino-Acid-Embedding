@@ -32,7 +32,7 @@ n=repmat(s,1,20);
 N_BLOSUM=BLOSUM./n;
 
 
-load('a2v_context_200.mat')
+load('a2v_context_1500.mat')
 
 s=sum(similarity,2);
 n=repmat(s,1,8000);
@@ -52,4 +52,25 @@ figure()
 plot(num_features,percentage);
 
 %%
-[poccur,pval]=hist(similarity(:),50);
+[poccur,pval]=hist(similarity(:),unique(similarity(:)));
+
+%%
+singleAA={'C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y','W'};
+j = 1;
+A_vector = zeros(400,1500);
+AAs = cell(400,1);
+counter  = 1;
+for i = 1:8000
+    if dict(i,2)==singleAA{j}
+        A_vector(counter,:) = vector(i,:);
+        AAs{counter}=dict(i,:);
+        counter = counter + 1;
+    end
+end
+
+train_X = A_vector;
+mappedX = tsne(train_X);
+dx = 0; dy = 0;
+figure()
+scatter(mappedX(:,1), mappedX(:,2));
+text(mappedX(:,1)+dx, mappedX(:,2)+dy, AAs);

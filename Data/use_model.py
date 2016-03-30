@@ -4,7 +4,7 @@ import scipy.io as sio
 import gensim, logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-wfname = 'context_sg_window10_size200.bin'
+wfname = 'context_sg_window10_size1500.bin'
 model = gensim.models.Word2Vec.load(wfname)
 
 context_dict = model.vocab.keys();

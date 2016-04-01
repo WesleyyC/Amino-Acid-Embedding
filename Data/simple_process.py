@@ -1,3 +1,7 @@
+from sets import Set
+before = Set(['C','E','F','G','H','I'])
+after = Set(['A','D'])
+
 r=open('all.protein.faa','r')
 w=open('context.processed.all.protein.faa','w')
 
@@ -7,10 +11,11 @@ for line in r:
 	if '>' in line and not start:
 		list_char = list(mem.replace('\n',''))
 		list_context = []
-		list_context_length = 1
+		list_context_length_before = 1
+		list_context_length_after = 1
 		for i in range(len(list_char)):
 			tmp=""
-			for j in range(i-list_context_length,i+list_context_length+1):
+			for j in range(i-list_context_length_before,i+list_context_length_after+1):
 				if j < 0 or j>=len(list_char):
 					tmp=tmp+'-'
 				else:

@@ -68,9 +68,28 @@ for i = 1:8000
     end
 end
 
-train_X = A_vector;
+%%
+train_X = vector;
 mappedX = tsne(train_X);
+
+%%
 dx = 0; dy = 0;
 figure()
 scatter(mappedX(:,1), mappedX(:,2));
-text(mappedX(:,1)+dx, mappedX(:,2)+dy, AAs);
+text(mappedX(:,1)+dx, mappedX(:,2)+dy, dict);
+
+%%
+singleAA={'C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y','W'};
+color={'c','r','g','b','k'};
+marker={'^','s','o','x'};
+figure()
+for i = 1:8000
+    idx=aa_idx(dict(i,2));
+    color_idx=floor((idx-1)/4)+1;
+    marker_idx=mod((idx-1),4)+1;
+    scatter(mappedX(i,1),mappedX(i,2),color{color_idx},marker{marker_idx});
+    hold on
+end
+    
+    
+    

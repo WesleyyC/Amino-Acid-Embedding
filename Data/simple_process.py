@@ -1,7 +1,3 @@
-from sets import Set
-before = Set(['C','E','F','G','H','I'])
-after = Set(['A','D'])
-
 r=open('all.protein.faa','r')
 w=open('context.processed.all.protein.faa','w')
 

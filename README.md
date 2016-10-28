@@ -11,3 +11,8 @@ However, time flies and scientist are able to generate a lot of protein amino ac
 ### Result
 ![t-SNE Result]
 (https://github.com/WesleyyC/Amino-Acid-Embedding/blob/master/Figure/a2v.jpg)
+
+Under the categorizing of
+
+![amino acid class]
+(https://github.com/WesleyyC/Amino-Acid-Embedding/blob/master/Relevent%20Literature/Amino_Acids.svg.png)

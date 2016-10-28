@@ -72,7 +72,7 @@ end
 
 %%
 train_X = vector;
-mappedX = tsne(train_X,[],[],60,500);
+mappedX = tsne(train_X,[],[],100,1200);
 
 %%
 dx = 0; dy = 0;
@@ -92,6 +92,31 @@ for i = 1:8000
     scatter(mappedX(i,1),mappedX(i,2),color{color_idx},marker{marker_idx});
     hold on
 end
-    
-    
+
+%%
+vec1=zeros(1,1500);
+vec2=zeros(1,1500);
+
+for i = 1:8000
+    if strcmp(dict(i,:),'CTK')
+        vec1 = vector(i,:);
+    elseif strcmp(dict(i,:),'DYW')
+        vec2 =vector(i,:);
+    end
+end
+
+1-pdist([vec1;vec2],'cosine')
+
+%%
+similarity=similarity-eye(8000);
+%%
+[r_idx_2,c_idx_2]=find(similarity>=0.2);
+
+%%
+
+for w=1:2200
+pari1 = dict(r_idx_2(w),:)
+pair2 = dict(c_idx_2(w),:)
+end
+
     

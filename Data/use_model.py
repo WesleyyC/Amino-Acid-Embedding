@@ -14,6 +14,8 @@ AAs=['C','S','T','P','A','G','N','D','E','Q','H','R','K','M','I','L','V','F','Y'
 for AA in AAs:
 	candidate.add(AA)
 
+candidate.add('-')
+
 def check_candidate(context):
 	for AA in context:
 		if AA not in candidate:

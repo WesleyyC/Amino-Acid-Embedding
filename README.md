@@ -1,4 +1,4 @@
-# Amino Acid 2 Vector
+# Amino Acid Embedding
 
 Word2Vec is thriving in computation linguistic as it helps us getting spatial semantic from word and better similarity function between word and word.
 

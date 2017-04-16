@@ -9,10 +9,8 @@ In Bioinformatic, a very important task is protein sequence alighnment and such 
 However, time flies and scientist are able to generate a lot of protein amino acid sequence with the new technology, but no one has touched the BLOSUM matrix yet. So we propose to use the same methodlogy in word2vec training to train a vector representation of each amino acid, which consequently can give us a similiarty score between them.
 
 ### t-SNE Result
-![t-SNE Result]
-(https://github.com/WesleyyC/Amino-Acid-Embedding/blob/master/Figure/a2v.jpg)
+![t-SNE Result](https://github.com/WesleyyC/Amino-Acid-Embedding/blob/master/Figure/a2v.jpg)
 
 ### Amino Acid Categorization
 
-![amino acid class]
-(https://github.com/WesleyyC/Amino-Acid-Embedding/blob/master/Relevent%20Literature/Amino_Acids.svg.png)
+![amino acid class](https://github.com/WesleyyC/Amino-Acid-Embedding/blob/master/Relevent%20Literature/Amino_Acids.svg.png)
